@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 9.4.7 (461683)"/><meta name="author" content="zhaowq32@outlook.com"/><meta name="created" content="2020-03-03 12:39:04 +0000"/><meta name="source" content="desktop.mac"/><meta name="updated" content="2020-12-02 13:02:14 +0000"/><meta name="content-class" content="yinxiang.markdown"/><title>接入说明</title></head><body><div style="font-size: 14px; margin: 0; padding: 0; width: 100%;"><h1 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 41px; border-bottom: 3px double #999; color: #000; margin-top: 14px;">Android接入说明</h1>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">权限要求</h2>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">要求应用app必须具有以下权限</strong></p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /&gt;
+&lt;uses-permission android:name="android.permission.READ_LOGS" /&gt;
+</code></pre>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">API接口描述</h2>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">/**
+ * SDK接口类
+ */
+public class Netshield {
+    /**
+     * 初始化
+     *@param context
+     *       ApplicationContext对象
+     *@return
+    &nbsp;&nbsp;*/
+    public static boolean init(Context context)；
+    
+    /**
+     * 资源释放
+     *@return
+    &nbsp;&nbsp;*/
+    public static void destroy()；
+    
+    /**
+     * 功能开启
+     *@return
+    &nbsp;&nbsp;*/
+    public static void secure_on()；
+    
+    /**
+     * 功能关闭
+     *@return
+    &nbsp;&nbsp;*/
+    public static void secure_off()；
+    
+    /**
+     * 获取客户端真实ip，该函数必须在init后进行调用，否则返回null
+     *@return
+     *  成功 返回客户端真实ip
+     *  失败 返回null
+    &nbsp;&nbsp;*/
+    public static String get_client_ip()；
+}
+</code></pre>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">接入说明</h2>
+<h3 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 27px; color: #333;">原生项目</h3>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Eclipse</h4>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">将 AAR 文件后缀名改为 ZIP 并解压，解压的目录需要和项目在同一盘符下。比如项目在F盘，则解压的sdk也应在 F盘。</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/ABD6F16E-B577-47F6-9EF3-6AA9D9C0435A.png" height="318" width="1644"/></p>
+<ol start="2" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">在解压得到的目录里创建一个 libs 文件夹</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/A81DC991-EB40-4DDB-9806-9F6D3B2007D9.png" height="870" width="1832"/></p>
+<ol start="3" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">删除 armeabi、armeabi-v7a、arm64-v8a、x86、x86_64文件夹和R.txt文件</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/3B77F862-8E4E-4642-B054-59C5CD9829CE.png" height="848" width="1698"/></p>
+<ol start="4" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">将classes.jar移动到libs文件夹下</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/A4C3C260-AC02-4D04-AB09-579AC4E3436C.png" height="588" width="1778"/></p>
+<ol start="5" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">将jni下和项目架构相同的文件夹(<strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">比如项目用到了armeabi和armeabi-v7a，则只拷贝armeabi和armeabi- v7a，其他的不要动</strong>)移到 libs 文件夹下</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/E513B21C-FDB8-498D-803E-6223C67254FA.png" height="700" width="1814"/></p>
+<ol start="6" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">删除jni文件夹</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/A0A31B34-D007-4D1A-AEB9-9F335E942580.png" height="490" width="1744"/></p>
+<ol start="7" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">在解压得到的目录里创建 project.properties 文件，内容如下：</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">target=android-22
+android.library=true
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/CD8A012A-A76F-4B15-8E61-7E68BA077824.png" height="886" width="1762"/></p>
+<ol start="8" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">导入sdk到eclipse中</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/6930B67C-9D0A-4FF7-B197-5E5B4D1D5099.png" height="1496" width="1432"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/46466D30-44B7-4A46-BE77-7387335A4670.png" height="1152" width="1446"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/CF849A0E-0194-4C6F-A9CC-93E0D738BA7B.png" height="1020" width="1804"/></p>
+<ol start="9" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">代码接入</li>
+</ol>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">AndroidManifest.xml中application节点无android:name配置</li>
+</ul>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">&lt;application
+    //添加这行代码
+    android:name="priv.coder.netshield.NetshieldApplication"
+    此处可能有其他代码，不需要修改
+    &gt;
+&lt;/application&gt;
+</code></pre>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">AndroidManifest.xml中application节点有android:name配置，则对对应的Application类进行修改，添加以下内容。</li>
+</ul>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">    private Class mainActivityClass = null;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        String packageName = this.getPackageName();
+        Intent launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        String className = launchIntent.getComponent().getClassName();
+        try {
+            mainActivityClass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            String errmsg = String.format("Class %s not found.Errmsg:%s", className, e.getMessage());
+            Toast.makeText(this.getApplicationContext(), errmsg, Toast.LENGTH_LONG).show();
+        }
+        if (null != mainActivityClass) {
+            registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+                @Override
+                public void onActivityCreated(Activity activity, Bundle bundle) {
+                    //如果activity是MainActivity的对象，则需要调用Netshield.init来初始化
+                    if (mainActivityClass.isInstance(activity)) {
+                        Log.d("NetshieldApplication", "Application start.Call init.");
+                        // 避免首次运行displayMsg中获取到的Context为空
+                        NetshieldActivityManager.getInstance().setMainActivity(activity);
+                        Netshield.init(activity.getApplicationContext());
+                    }
+                }
+
+                @Override
+                public void onActivityStarted(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivityResumed(Activity activity) {
+                    NetshieldActivityManager.getInstance().setCurrentActivity(activity);
+                }
+
+                @Override
+                public void onActivityPaused(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivityStopped(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onActivityDestroyed(Activity activity) {
+
+                }
+            });
+        } else {
+            Toast.makeText(this.getApplicationContext(), "mainActivityClass is null", Toast.LENGTH_LONG).show();
+        }
+    }
+</code></pre>
+<h4 style="line-height: 160%; box-sizing: content-box; font-size: 20px; color: #333;">Android Studio</h4>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">如果项目开启了prguard优化，请添加以下规则</strong></p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">-keep class priv.coder.netshield.* { *; }
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">如果报错transformClassesAndResourcesWithProguardForRelease，请添加</strong></p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">-ignorewarnings
+</code></pre>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;">假设原module名为app，新增的module名为netshield</p>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">添加netshield-release模块</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/5FFBD541-F30C-48FE-AC20-3C6D2FFDA26C.png" height="1158" width="1036"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/FE567543-12B0-48FF-8CF3-9A674C36DF6A.png" height="396" width="744"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/39710A29-C55B-4A82-BEA2-0DEABB801B12.png" height="1344" width="1800"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/CEF1627C-C2E6-43C2-8319-6AFBE401774D.png" height="1344" width="1800"/></p>
+<ol start="2" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">设置项目依赖</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/7904B9F8-A9C2-4BA4-90ED-FD9899F61A76.png" height="1044" width="1900"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/B5F88B7E-CE05-4D96-918B-999844D071EF.png" height="1046" width="1900"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/F6970E0F-08C4-42DF-8726-419E46D43C25.png" height="1386" width="1254"/></p>
+<ol start="3" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">同步配置</li>
+</ol>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/6CDF3AF7-E8F4-4110-8767-4B768476B4A9.png" height="1142" width="1078"/></p>
+<ol start="4" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">代码接入</li>
+</ol>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">AndroidManifest.xml中application节点无android:name配置</li>
+</ul>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">&lt;application
+//添加这行代码       
+android:name="priv.coder.netshield.NetshieldApplication"
+//此处可能有其他代码，不需要修改
+&gt;
+&lt;/application&gt;
+</code></pre>
+<ul style="line-height: 160%; box-sizing: content-box; display: block; list-style-type: disc; padding-left: 30px; margin: 6px 0 10px; color: #333;">
+<li style="line-height: 160%; box-sizing: content-box; position: relative;">AndroidManifest.xml中application节点有android:name配置，则对对应的Application类进行修改，添加以下内容。</li>
+</ul>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">    private Class mainActivityClass = null;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        String packageName = this.getPackageName();
+        Intent launchIntent = this.getPackageManager().getLaunchIntentForPackage(packageName);
+        String className = launchIntent.getComponent().getClassName();
+        try {
+            mainActivityClass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            String errmsg = String.format("Class %s not found.Errmsg:%s", className, e.getMessage());
+            Toast.makeText(this.getApplicationContext(), errmsg, Toast.LENGTH_LONG).show();
+        }
+        if (null != mainActivityClass) {
+            registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+                @Override
+                public void onActivityCreated(Activity activity, Bundle bundle) {
+                    //如果activity是MainActivity的对象，则需要调用Netshield.init来初始化
+                    if (mainActivityClass.isInstance(activity)) {
+                        Log.d("NetshieldApplication", "Application start.Call init.");
+                        // 避免首次运行displayMsg中获取到的Context为空
+                        NetshieldActivityManager.getInstance().setMainActivity(activity);
+                        Netshield.init(activity.getApplicationContext());
+                    }
+                }
+
+                @Override
+                public void onActivityStarted(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivityResumed(Activity activity) {
+                    NetshieldActivityManager.getInstance().setCurrentActivity(activity);
+                }
+
+                @Override
+                public void onActivityPaused(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivityStopped(Activity activity) {
+
+                }
+
+                @Override
+                public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onActivityDestroyed(Activity activity) {
+
+                }
+            });
+        } else {
+            Toast.makeText(this.getApplicationContext(), "mainActivityClass is null", Toast.LENGTH_LONG).show();
+        }
+    }
+</code></pre>
+<h3 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 27px; color: #333;">Unity项目</h3>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">将 AAR 文件后缀名改为 ZIP 并解压</li>
+<li style="line-height: 160%; box-sizing: content-box;">将不同架构下的libnetshield.so文件拷贝到Assets\Plugins\Android\libs\对应架构文件夹下。</li>
+<li style="line-height: 160%; box-sizing: content-box;">将netshield-release\classes.jar文件拷贝到Assets\Plugins\Android\libs目录</li>
+<li style="line-height: 160%; box-sizing: content-box;">在Unity3d首个MonoBehaviour的Start函数里调用初始化，初始化代码如下：</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">Debug.Log("netshield init start");
+// 获取activity
+AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic&lt;AndroidJavaObject&gt;("currentActivity");
+// 获取Netshield类
+AndroidJavaClass javaClass = new AndroidJavaClass("priv.coder.netshield.Netshield");
+// 调用init函数
+javaClass.CallStatic&lt;bool&gt;("init", activity);
+Debug.Log("netshield init complete");
+</code></pre>
+<ol start="5" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">在Unity3d首个MonoBehaviour的OnDestroy函数里调用释放，释放代码如下：</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">AndroidJavaClass javaClass = new AndroidJavaClass("priv.coder.netshield.Netshield");
+javaClass.CallStatic("destroy");
+</code></pre>
+<ol start="6" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">开启和关闭SDK</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">AndroidJavaClass javaClass = new AndroidJavaClass("priv.coder.netshield.Netshield");
+// 功能开启
+javaClass.CallStatic("secure_on");
+// 功能关闭
+javaClass.CallStatic("secure_off");
+</code></pre>
+<h1 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 41px; border-bottom: 3px double #999; color: #000;">IOS</h1>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">API接口描述</h2>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">//初始化
+bool secure_init(UIWindow *pUIWindow);
+
+//资源释放
+void secure_destroy();
+
+//现场恢复
+void secure_resume();
+
+//功能开启
+void secure_on();
+
+//功能关闭
+void secure_off();
+
+//获取客户端IP，需要在secure_init后调用
+//成功返回客户端IP，失败返回NULL
+const char *get_client_ip();
+</code></pre>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">接入说明</h2>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/2F0DA543-6A7B-4BDB-A49B-1426330F14B9.png" height="1428" width="1796"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/20123375-118C-4E4C-8AB8-DD0D759431A0.png" height="1116" width="1658"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/598F10FF-6D46-4231-9C33-80306B28A35A.png" height="1738" width="1768"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/264B8B01-C387-4C8D-846E-8F92FEC00C40.png" height="1060" width="1776"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/95A57525-2D0F-4B19-994C-1DB842892472.png" height="700" width="1722"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/33684143-0472-4B0D-B328-32B7E0012F03.png" height="1480" width="1762"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><img src="%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E.resources/4CE206D8-7440-436C-A1BB-8694312D4321.png" height="1238" width="1780"/></p>
+<p style="line-height: 160%; box-sizing: content-box; margin: 10px 0; color: #333;"><strong style="line-height: 160%; box-sizing: content-box; font-weight: 700;">请重点关注下列代码注释(COCOS生成的工程需要修改AppContoller而不是AppDelegate)</strong></p>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">#import "NetshieldImpl.h"
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //secure_init函数需要在window变量实例化后进行调用
+    secure_init(window);
+    
+    //获取客户端真实ip
+    const char *clientIp = get_client_ip();
+    if(nullptr != clientIp) {
+        NSLog(@"clientIp: %@", [NSString stringWithCString:clientIp encoding:[NSString defaultCStringEncoding]]);
+    } else {
+        //关闭防护，从第三方网站获取IP
+        secure_off();
+        //获取ip
+        //...
+        //获取ip完毕后，打开防护
+        secure_on();
+    }
+    //业务处理逻辑
+    //......
+    return YES;
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //此函数必须调用
+    secure_resume();
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // 实现如下代码，才能使程序处于后台时被杀死，调用applicationWillTerminate:方法
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(){}];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    secure_destroy();
+}
+
+</code></pre>
+<h1 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 41px; border-bottom: 3px double #999; color: #000;">Windows</h1>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">API接口描述</h2>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">//初始化
+bool secure_init();
+
+//资源释放
+void secure_destroy();
+
+//功能开启
+void secure_on();
+
+//功能关闭
+void secure_off();
+
+//获取客户端IP，需要在secure_init后调用
+//成功返回客户端IP，失败返回NULL
+const char *get_client_ip()
+</code></pre>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">Visual Studio项目</h2>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">拷贝netshield.dll到应用目录下</li>
+<li style="line-height: 160%; box-sizing: content-box;">修改main函数</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">int main()
+{
+    typedef void(__cdecl* void_func_t)();
+    typedef bool(__cdecl* bool_func_t)();
+    typedef const char *(__cdecl* secure_get_client_ip_t)();
+    typedef string(__cdecl* get_client_ip_from_network_t)();
+    bool_func_t secure_init = NULL;
+    void_func_t secure_destroy = NULL;
+    void_func_t secure_on = NULL;
+    void_func_t secure_off = NULL;
+    secure_get_client_ip_t get_client_ip = NULL;
+    get_client_ip_from_network_t get_client_ip_from_network = NULL;
+    HINSTANCE pNetshield = NULL;
+#ifdef UNICODE
+    pNetshield = LoadLibraryW(TEXT("netshield.dll"));
+#else
+    pNetshield = LoadLibraryA(TEXT("netshield.dll"));
+#endif
+    if (NULL != pNetshield) {
+        char errmsg[512] = { 0 };
+        secure_init = (bool_func_t)GetProcAddress(pNetshield, "secure_init");
+        secure_destroy = (void_func_t)GetProcAddress(pNetshield, "secure_destroy");
+        secure_on = (void_func_t)GetProcAddress(pNetshield, "secure_on");
+        secure_off = (void_func_t)GetProcAddress(pNetshield, "secure_off");
+        get_client_ip = (secure_get_client_ip_t)GetProcAddress(pNetshield, "get_client_ip");
+        get_client_ip_from_network = (get_client_ip_from_network_t)GetProcAddress(pNetshield, "get_client_ip_from_network");
+    }
+    else {
+        MessageBoxA(NULL, "netshield.dll加载失败，请联系开发人员。", "netshield", MB_OK | MB_ICONINFORMATION);
+        exit(0);
+    }
+    //调用secure_init函数初始化sdk
+    if (!secure_init()) {
+        return 0;
+    }
+    //获取客户端真实ip
+    const char *clientIp = get_client_ip();
+    if (NULL != clientIp) {
+        fprintf(stdout, "clientIp:%s\n", clientIp);
+    }
+    else {
+        //关闭防护，从第三方网站获取IP
+        secure_off();
+        //获取ip
+        //...
+        //获取ip完毕后，打开防护
+        secure_on();
+    }
+    //业务代码
+    //......
+    //调用secure_destroy释放资源
+    secure_destroy();
+    return 0;
+}
+</code></pre>
+<h2 style="line-height: 160%; box-sizing: content-box; font-weight: 700; font-size: 34px; border-bottom: 1px solid #dbdbdb; color: #333;">Unity项目</h2>
+<ol style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">解压SDK压缩包，将目录下所有文件拷贝到Assets\Plugins&lt;Platform&gt;目录，如Assets\Plugins\x86_64。</li>
+<li style="line-height: 160%; box-sizing: content-box;">添加SDK工具类</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">public class NetshieldHelper
+{
+    [DllImport("netshield")]
+    public static extern bool secure_init();
+    [DllImport("netshield")]
+    public static extern void secure_destroy();
+    [DllImport("netshield")]
+    public static extern void secure_on();
+    [DllImport("netshield")]
+    public static extern void secure_off();
+}
+</code></pre>
+<ol start="3" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">在Unity3d首个MonoBehaviour的Start函数里调用初始化，初始化代码如下：</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">NetshieldHelper.secure_init();
+</code></pre>
+<ol start="5" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">在Unity3d首个MonoBehaviour的OnDestroy函数里调用释放，释放代码如下：</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">NetshieldHelper.secure_destroy();
+</code></pre>
+<ol start="6" style="line-height: 160%; box-sizing: content-box; display: block; padding-left: 30px; margin: 6px 0 10px; color: #333; list-style-type: decimal;">
+<li style="line-height: 160%; box-sizing: content-box;">开启和关闭SDK</li>
+</ol>
+<pre style="line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; margin: 2px 0 8px; background-color: #f5f7f8;"><code style="display: block; overflow-x: auto; background: #1e1e1e; line-height: 160%; box-sizing: content-box; border: 0; border-radius: 0; letter-spacing: -.3px; padding: 18px; color: #f4f4f4; white-space: pre-wrap;">// 功能开启
+NetshieldHelper.secure_on();
+// 功能关闭
+NetshieldHelper.secure_off();
+</code></pre>
+</div><center style="display:none !important;visibility:collapse !important;height:0 !important;white-space:nowrap;width:100%;overflow:hidden">%23%20Android%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E%0A%23%23%20%E6%9D%83%E9%99%90%E8%A6%81%E6%B1%82%0A%0A**%E8%A6%81%E6%B1%82%E5%BA%94%E7%94%A8app%E5%BF%85%E9%A1%BB%E5%85%B7%E6%9C%89%E4%BB%A5%E4%B8%8B%E6%9D%83%E9%99%90**%0A%0A%60%60%60%0A%3Cuses-permission%20android%3Aname%3D%22android.permission.READ_PHONE_STATE%22%20%2F%3E%0A%3Cuses-permission%20android%3Aname%3D%22android.permission.INTERNET%22%20%2F%3E%0A%3Cuses-permission%20android%3Aname%3D%22android.permission.ACCESS_NETWORK_STATE%22%20%2F%3E%0A%3Cuses-permission%20android%3Aname%3D%22android.permission.ACCESS_WIFI_STATE%22%20%2F%3E%0A%3Cuses-permission%20android%3Aname%3D%22android.permission.READ_LOGS%22%20%2F%3E%0A%60%60%60%0A%0A%23%23%20API%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%0A%60%60%60%0A%2F**%0A%20*%20SDK%E6%8E%A5%E5%8F%A3%E7%B1%BB%0A%20*%2F%0Apublic%20class%20Netshield%20%7B%0A%20%20%20%20%2F**%0A%20%20%20%20%20*%20%E5%88%9D%E5%A7%8B%E5%8C%96%0A%20%20%20%20%20*%40param%20context%0A%20%20%20%20%20*%20%20%20%20%20%20%20ApplicationContext%E5%AF%B9%E8%B1%A1%0A%20%20%20%20%20*%40return%0A%20%20%20%20%C2%A0*%2F%0A%20%20%20%20public%20static%20boolean%20init(Context%20context)%EF%BC%9B%0A%20%20%20%20%0A%20%20%20%20%2F**%0A%20%20%20%20%20*%20%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE%0A%20%20%20%20%20*%40return%0A%20%20%20%20%C2%A0*%2F%0A%20%20%20%20public%20static%20void%20destroy()%EF%BC%9B%0A%20%20%20%20%0A%20%20%20%20%2F**%0A%20%20%20%20%20*%20%E5%8A%9F%E8%83%BD%E5%BC%80%E5%90%AF%0A%20%20%20%20%20*%40return%0A%20%20%20%20%C2%A0*%2F%0A%20%20%20%20public%20static%20void%20secure_on()%EF%BC%9B%0A%20%20%20%20%0A%20%20%20%20%2F**%0A%20%20%20%20%20*%20%E5%8A%9F%E8%83%BD%E5%85%B3%E9%97%AD%0A%20%20%20%20%20*%40return%0A%20%20%20%20%C2%A0*%2F%0A%20%20%20%20public%20static%20void%20secure_off()%EF%BC%9B%0A%20%20%20%20%0A%20%20%20%20%2F**%0A%20%20%20%20%20*%20%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9C%9F%E5%AE%9Eip%EF%BC%8C%E8%AF%A5%E5%87%BD%E6%95%B0%E5%BF%85%E9%A1%BB%E5%9C%A8init%E5%90%8E%E8%BF%9B%E8%A1%8C%E8%B0%83%E7%94%A8%EF%BC%8C%E5%90%A6%E5%88%99%E8%BF%94%E5%9B%9Enull%0A%20%20%20%20%20*%40return%0A%20%20%20%20%20*%20%20%E6%88%90%E5%8A%9F%20%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9C%9F%E5%AE%9Eip%0A%20%20%20%20%20*%20%20%E5%A4%B1%E8%B4%A5%20%E8%BF%94%E5%9B%9Enull%0A%20%20%20%20%C2%A0*%2F%0A%20%20%20%20public%20static%20String%20get_client_ip()%EF%BC%9B%0A%7D%0A%60%60%60%0A%0A%23%23%20%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E%0A%23%23%23%20%E5%8E%9F%E7%94%9F%E9%A1%B9%E7%9B%AE%0A%23%23%23%23%20Eclipse%0A1.%20%E5%B0%86%20AAR%20%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%90%8D%E6%94%B9%E4%B8%BA%20ZIP%20%E5%B9%B6%E8%A7%A3%E5%8E%8B%EF%BC%8C%E8%A7%A3%E5%8E%8B%E7%9A%84%E7%9B%AE%E5%BD%95%E9%9C%80%E8%A6%81%E5%92%8C%E9%A1%B9%E7%9B%AE%E5%9C%A8%E5%90%8C%E4%B8%80%E7%9B%98%E7%AC%A6%E4%B8%8B%E3%80%82%E6%AF%94%E5%A6%82%E9%A1%B9%E7%9B%AE%E5%9C%A8F%E7%9B%98%EF%BC%8C%E5%88%99%E8%A7%A3%E5%8E%8B%E7%9A%84sdk%E4%B9%9F%E5%BA%94%E5%9C%A8%20F%E7%9B%98%E3%80%82%0A%0A!%5B9a40a3261f3dbbccfb7de1fbbf1dd5e3.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp173)%0A%0A2.%20%E5%9C%A8%E8%A7%A3%E5%8E%8B%E5%BE%97%E5%88%B0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%87%8C%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%20libs%20%E6%96%87%E4%BB%B6%E5%A4%B9%0A%0A!%5B1a25d79b2238ffb7c4b636f7c0cd8644.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp143)%0A%0A3.%20%E5%88%A0%E9%99%A4%20armeabi%E3%80%81armeabi-v7a%E3%80%81arm64-v8a%E3%80%81x86%E3%80%81x86_64%E6%96%87%E4%BB%B6%E5%A4%B9%E5%92%8CR.txt%E6%96%87%E4%BB%B6%0A%0A!%5B498f7a9f01bf3b318410a57658348853.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp144)%0A%0A4.%20%E5%B0%86classes.jar%E7%A7%BB%E5%8A%A8%E5%88%B0libs%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%0A%0A!%5B0858262aea736812c847070f4dc4082b.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp145)%0A%0A5.%20%E5%B0%86jni%E4%B8%8B%E5%92%8C%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E7%9B%B8%E5%90%8C%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9(**%E6%AF%94%E5%A6%82%E9%A1%B9%E7%9B%AE%E7%94%A8%E5%88%B0%E4%BA%86armeabi%E5%92%8Carmeabi-v7a%EF%BC%8C%E5%88%99%E5%8F%AA%E6%8B%B7%E8%B4%9Darmeabi%E5%92%8Carmeabi-%20v7a%EF%BC%8C%E5%85%B6%E4%BB%96%E7%9A%84%E4%B8%8D%E8%A6%81%E5%8A%A8**)%E7%A7%BB%E5%88%B0%20libs%20%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%0A%0A!%5B598ddf31f2797bada41d4bd34c647603.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp146)%0A%0A6.%20%E5%88%A0%E9%99%A4jni%E6%96%87%E4%BB%B6%E5%A4%B9%0A%0A!%5B71c73a373a39bfe473d1fae01105395c.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp147)%0A%0A7.%20%E5%9C%A8%E8%A7%A3%E5%8E%8B%E5%BE%97%E5%88%B0%E7%9A%84%E7%9B%AE%E5%BD%95%E9%87%8C%E5%88%9B%E5%BB%BA%20project.properties%20%E6%96%87%E4%BB%B6%EF%BC%8C%E5%86%85%E5%AE%B9%E5%A6%82%E4%B8%8B%EF%BC%9A%0A%0A%60%60%60%0Atarget%3Dandroid-22%0Aandroid.library%3Dtrue%0A%60%60%60%0A%0A!%5B22d12cee9d07bb1b548b0d25eff7c6f3.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp148)%0A%0A%0A8.%20%E5%AF%BC%E5%85%A5sdk%E5%88%B0eclipse%E4%B8%AD%0A%0A!%5Bcf8878674bbddaa1863dfce7f4fddd68.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp149)%0A%0A!%5B58dd81774506e5efa13d0a4be38e430f.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp150)%0A%0A!%5B88bace2b72e654ebc0631a19f235ff48.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp151)%0A%0A9.%20%E4%BB%A3%E7%A0%81%E6%8E%A5%E5%85%A5%0A*%20AndroidManifest.xml%E4%B8%ADapplication%E8%8A%82%E7%82%B9%E6%97%A0android%3Aname%E9%85%8D%E7%BD%AE%0A%0A%60%60%60%0A%3Capplication%0A%20%20%20%20%2F%2F%E6%B7%BB%E5%8A%A0%E8%BF%99%E8%A1%8C%E4%BB%A3%E7%A0%81%0A%20%20%20%20android%3Aname%3D%22priv.coder.netshield.NetshieldApplication%22%0A%20%20%20%20%E6%AD%A4%E5%A4%84%E5%8F%AF%E8%83%BD%E6%9C%89%E5%85%B6%E4%BB%96%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%0A%20%20%20%20%3E%0A%3C%2Fapplication%3E%0A%60%60%60%0A%0A*%20AndroidManifest.xml%E4%B8%ADapplication%E8%8A%82%E7%82%B9%E6%9C%89android%3Aname%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%88%99%E5%AF%B9%E5%AF%B9%E5%BA%94%E7%9A%84Application%E7%B1%BB%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%EF%BC%8C%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9%E3%80%82%0A%60%60%60%0A%20%20%20%20private%20Class%20mainActivityClass%20%3D%20null%3B%0A%0A%20%20%20%20%40Override%0A%20%20%20%20public%20void%20onCreate()%20%7B%0A%20%20%20%20%20%20%20%20super.onCreate()%3B%0A%20%20%20%20%20%20%20%20String%20packageName%20%3D%20this.getPackageName()%3B%0A%20%20%20%20%20%20%20%20Intent%20launchIntent%20%3D%20this.getPackageManager().getLaunchIntentForPackage(packageName)%3B%0A%20%20%20%20%20%20%20%20String%20className%20%3D%20launchIntent.getComponent().getClassName()%3B%0A%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20mainActivityClass%20%3D%20Class.forName(className)%3B%0A%20%20%20%20%20%20%20%20%7D%20catch%20(ClassNotFoundException%20e)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20String%20errmsg%20%3D%20String.format(%22Class%20%25s%20not%20found.Errmsg%3A%25s%22%2C%20className%2C%20e.getMessage())%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20Toast.makeText(this.getApplicationContext()%2C%20errmsg%2C%20Toast.LENGTH_LONG).show()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20if%20(null%20!%3D%20mainActivityClass)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20registerActivityLifecycleCallbacks(new%20ActivityLifecycleCallbacks()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityCreated(Activity%20activity%2C%20Bundle%20bundle)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%E5%A6%82%E6%9E%9Cactivity%E6%98%AFMainActivity%E7%9A%84%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E8%B0%83%E7%94%A8Netshield.init%E6%9D%A5%E5%88%9D%E5%A7%8B%E5%8C%96%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(mainActivityClass.isInstance(activity))%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Log.d(%22NetshieldApplication%22%2C%20%22Application%20start.Call%20init.%22)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%E9%81%BF%E5%85%8D%E9%A6%96%E6%AC%A1%E8%BF%90%E8%A1%8CdisplayMsg%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%88%B0%E7%9A%84Context%E4%B8%BA%E7%A9%BA%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20NetshieldActivityManager.getInstance().setMainActivity(activity)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Netshield.init(activity.getApplicationContext())%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityStarted(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityResumed(Activity%20activity)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20NetshieldActivityManager.getInstance().setCurrentActivity(activity)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityPaused(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityStopped(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivitySaveInstanceState(Activity%20activity%2C%20Bundle%20bundle)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityDestroyed(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20Toast.makeText(this.getApplicationContext()%2C%20%22mainActivityClass%20is%20null%22%2C%20Toast.LENGTH_LONG).show()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%60%60%60%0A%23%23%23%23%20Android%20Studio%0A%0A**%E5%A6%82%E6%9E%9C%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%90%AF%E4%BA%86prguard%E4%BC%98%E5%8C%96%EF%BC%8C%E8%AF%B7%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E8%A7%84%E5%88%99**%0A%0A%60%60%60%0A-keep%20class%20priv.coder.netshield.*%20%7B%20*%3B%20%7D%0A%60%60%60%0A%0A**%E5%A6%82%E6%9E%9C%E6%8A%A5%E9%94%99transformClassesAndResourcesWithProguardForRelease%EF%BC%8C%E8%AF%B7%E6%B7%BB%E5%8A%A0**%0A%60%60%60%0A-ignorewarnings%0A%60%60%60%0A%0A%E5%81%87%E8%AE%BE%E5%8E%9Fmodule%E5%90%8D%E4%B8%BAapp%EF%BC%8C%E6%96%B0%E5%A2%9E%E7%9A%84module%E5%90%8D%E4%B8%BAnetshield%0A%0A1.%20%E6%B7%BB%E5%8A%A0netshield-release%E6%A8%A1%E5%9D%97%0A%0A!%5Bddd840cf890ac5ae92b60664756a5d12.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp162)%0A%0A!%5B98c952ff4ea4b2b23a4a52e944774b4d.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp166)%0A%0A!%5B5f2731fd0ed2120bd62da66aba7fa80e.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp167)%0A%0A!%5Bc924cbe8daa17e30599310feebcc4dd4.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp168)%0A%0A2.%20%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96%0A%0A!%5Bbcd929f0a7f75cacff680e96a0e40dc7.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp169)%0A%0A!%5Bca9617a3535e301e51cd8ec3baeaaab9.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp170)%0A%0A!%5B09758256c2a145dd6a2819ac56ef0e7d.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp171)%0A%0A3.%20%E5%90%8C%E6%AD%A5%E9%85%8D%E7%BD%AE%0A%0A!%5Bddabd22baf50b4aba61af035260677cb.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp172)%0A%0A4.%20%E4%BB%A3%E7%A0%81%E6%8E%A5%E5%85%A5%0A%0A*%20AndroidManifest.xml%E4%B8%ADapplication%E8%8A%82%E7%82%B9%E6%97%A0android%3Aname%E9%85%8D%E7%BD%AE%0A%0A%60%60%60%0A%3Capplication%0A%2F%2F%E6%B7%BB%E5%8A%A0%E8%BF%99%E8%A1%8C%E4%BB%A3%E7%A0%81%20%20%20%20%20%20%20%0Aandroid%3Aname%3D%22priv.coder.netshield.NetshieldApplication%22%0A%2F%2F%E6%AD%A4%E5%A4%84%E5%8F%AF%E8%83%BD%E6%9C%89%E5%85%B6%E4%BB%96%E4%BB%A3%E7%A0%81%EF%BC%8C%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%0A%3E%0A%3C%2Fapplication%3E%0A%60%60%60%0A%0A*%20AndroidManifest.xml%E4%B8%ADapplication%E8%8A%82%E7%82%B9%E6%9C%89android%3Aname%E9%85%8D%E7%BD%AE%EF%BC%8C%E5%88%99%E5%AF%B9%E5%AF%B9%E5%BA%94%E7%9A%84Application%E7%B1%BB%E8%BF%9B%E8%A1%8C%E4%BF%AE%E6%94%B9%EF%BC%8C%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E5%86%85%E5%AE%B9%E3%80%82%0A%0A%60%60%60%0A%20%20%20%20private%20Class%20mainActivityClass%20%3D%20null%3B%0A%0A%20%20%20%20%40Override%0A%20%20%20%20public%20void%20onCreate()%20%7B%0A%20%20%20%20%20%20%20%20super.onCreate()%3B%0A%20%20%20%20%20%20%20%20String%20packageName%20%3D%20this.getPackageName()%3B%0A%20%20%20%20%20%20%20%20Intent%20launchIntent%20%3D%20this.getPackageManager().getLaunchIntentForPackage(packageName)%3B%0A%20%20%20%20%20%20%20%20String%20className%20%3D%20launchIntent.getComponent().getClassName()%3B%0A%20%20%20%20%20%20%20%20try%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20mainActivityClass%20%3D%20Class.forName(className)%3B%0A%20%20%20%20%20%20%20%20%7D%20catch%20(ClassNotFoundException%20e)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20String%20errmsg%20%3D%20String.format(%22Class%20%25s%20not%20found.Errmsg%3A%25s%22%2C%20className%2C%20e.getMessage())%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20Toast.makeText(this.getApplicationContext()%2C%20errmsg%2C%20Toast.LENGTH_LONG).show()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20if%20(null%20!%3D%20mainActivityClass)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20registerActivityLifecycleCallbacks(new%20ActivityLifecycleCallbacks()%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityCreated(Activity%20activity%2C%20Bundle%20bundle)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%E5%A6%82%E6%9E%9Cactivity%E6%98%AFMainActivity%E7%9A%84%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%88%99%E9%9C%80%E8%A6%81%E8%B0%83%E7%94%A8Netshield.init%E6%9D%A5%E5%88%9D%E5%A7%8B%E5%8C%96%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20(mainActivityClass.isInstance(activity))%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Log.d(%22NetshieldApplication%22%2C%20%22Application%20start.Call%20init.%22)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20%E9%81%BF%E5%85%8D%E9%A6%96%E6%AC%A1%E8%BF%90%E8%A1%8CdisplayMsg%E4%B8%AD%E8%8E%B7%E5%8F%96%E5%88%B0%E7%9A%84Context%E4%B8%BA%E7%A9%BA%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20NetshieldActivityManager.getInstance().setMainActivity(activity)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Netshield.init(activity.getApplicationContext())%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityStarted(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityResumed(Activity%20activity)%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20NetshieldActivityManager.getInstance().setCurrentActivity(activity)%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityPaused(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityStopped(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivitySaveInstanceState(Activity%20activity%2C%20Bundle%20bundle)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%40Override%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20public%20void%20onActivityDestroyed(Activity%20activity)%20%7B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D)%3B%0A%20%20%20%20%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20Toast.makeText(this.getApplicationContext()%2C%20%22mainActivityClass%20is%20null%22%2C%20Toast.LENGTH_LONG).show()%3B%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%60%60%60%0A%0A%23%23%23%20Unity%E9%A1%B9%E7%9B%AE%0A%0A1.%20%20%E5%B0%86%20AAR%20%E6%96%87%E4%BB%B6%E5%90%8E%E7%BC%80%E5%90%8D%E6%94%B9%E4%B8%BA%20ZIP%20%E5%B9%B6%E8%A7%A3%E5%8E%8B%0A2.%20%20%E5%B0%86%E4%B8%8D%E5%90%8C%E6%9E%B6%E6%9E%84%E4%B8%8B%E7%9A%84libnetshield.so%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E5%88%B0Assets%5CPlugins%5CAndroid%5Clibs%5C%E5%AF%B9%E5%BA%94%E6%9E%B6%E6%9E%84%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E3%80%82%0A3.%20%E5%B0%86netshield-release%5Cclasses.jar%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E5%88%B0Assets%5CPlugins%5CAndroid%5Clibs%E7%9B%AE%E5%BD%95%0A4.%20%E5%9C%A8Unity3d%E9%A6%96%E4%B8%AAMonoBehaviour%E7%9A%84Start%E5%87%BD%E6%95%B0%E9%87%8C%E8%B0%83%E7%94%A8%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A%0A%0A%60%60%60%0ADebug.Log(%22netshield%20init%20start%22)%3B%0A%2F%2F%20%E8%8E%B7%E5%8F%96activity%0AAndroidJavaObject%20activity%20%3D%20new%20AndroidJavaClass(%22com.unity3d.player.UnityPlayer%22).GetStatic%3CAndroidJavaObject%3E(%22currentActivity%22)%3B%0A%2F%2F%20%E8%8E%B7%E5%8F%96Netshield%E7%B1%BB%0AAndroidJavaClass%20javaClass%20%3D%20new%20AndroidJavaClass(%22priv.coder.netshield.Netshield%22)%3B%0A%2F%2F%20%E8%B0%83%E7%94%A8init%E5%87%BD%E6%95%B0%0AjavaClass.CallStatic%3Cbool%3E(%22init%22%2C%20activity)%3B%0ADebug.Log(%22netshield%20init%20complete%22)%3B%0A%60%60%60%20%20%0A%0A5.%20%E5%9C%A8Unity3d%E9%A6%96%E4%B8%AAMonoBehaviour%E7%9A%84OnDestroy%E5%87%BD%E6%95%B0%E9%87%8C%E8%B0%83%E7%94%A8%E9%87%8A%E6%94%BE%EF%BC%8C%E9%87%8A%E6%94%BE%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A%0A%0A%60%60%60%0AAndroidJavaClass%20javaClass%20%3D%20new%20AndroidJavaClass(%22priv.coder.netshield.Netshield%22)%3B%0AjavaClass.CallStatic(%22destroy%22)%3B%0A%60%60%60%0A%0A6.%20%E5%BC%80%E5%90%AF%E5%92%8C%E5%85%B3%E9%97%ADSDK%0A%0A%60%60%60%0AAndroidJavaClass%20javaClass%20%3D%20new%20AndroidJavaClass(%22priv.coder.netshield.Netshield%22)%3B%0A%2F%2F%20%E5%8A%9F%E8%83%BD%E5%BC%80%E5%90%AF%0AjavaClass.CallStatic(%22secure_on%22)%3B%0A%2F%2F%20%E5%8A%9F%E8%83%BD%E5%85%B3%E9%97%AD%0AjavaClass.CallStatic(%22secure_off%22)%3B%0A%60%60%60%0A%0A%23%20IOS%0A%23%23%20API%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%0A%0A%60%60%60%0A%2F%2F%E5%88%9D%E5%A7%8B%E5%8C%96%0Abool%20secure_init(UIWindow%20*pUIWindow)%3B%0A%0A%2F%2F%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE%0Avoid%20secure_destroy()%3B%0A%0A%2F%2F%E7%8E%B0%E5%9C%BA%E6%81%A2%E5%A4%8D%0Avoid%20secure_resume()%3B%0A%0A%2F%2F%E5%8A%9F%E8%83%BD%E5%BC%80%E5%90%AF%0Avoid%20secure_on()%3B%0A%0A%2F%2F%E5%8A%9F%E8%83%BD%E5%85%B3%E9%97%AD%0Avoid%20secure_off()%3B%0A%0A%2F%2F%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AFIP%EF%BC%8C%E9%9C%80%E8%A6%81%E5%9C%A8secure_init%E5%90%8E%E8%B0%83%E7%94%A8%0A%2F%2F%E6%88%90%E5%8A%9F%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AFIP%EF%BC%8C%E5%A4%B1%E8%B4%A5%E8%BF%94%E5%9B%9ENULL%0Aconst%20char%20*get_client_ip()%3B%0A%60%60%60%0A%0A%23%23%20%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E%0A%0A!%5B82299a538ccb8b4ad9193d90c8c2d264.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp153)%0A%0A!%5B2d9157b8eb8041fcece96e9b27fc45de.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp154)%0A%0A!%5B9228e29b8e958180522641ad462895ce.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp155)%0A%0A!%5B718b22684646387215ae948ef693c25e.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp156)%0A%0A!%5B90246372a989216693f8366b66ae4c2c.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp157)%0A%0A!%5B21e2a894b0ce91a63f0c7a6302465901.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp158)%0A%0A!%5B208ee8533fd247ca76f1d4883c244498.png%5D(evernotecid%3A%2F%2FFEA9BEE0-A975-41B8-8660-2AAABE236DB5%2Fappyinxiangcom%2F21188007%2FENResource%2Fp159)%0A%0A**%E8%AF%B7%E9%87%8D%E7%82%B9%E5%85%B3%E6%B3%A8%E4%B8%8B%E5%88%97%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A(COCOS%E7%94%9F%E6%88%90%E7%9A%84%E5%B7%A5%E7%A8%8B%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9AppContoller%E8%80%8C%E4%B8%8D%E6%98%AFAppDelegate)**%0A%0A%60%60%60%0A%23import%20%22NetshieldImpl.h%22%0A%0A-%20(BOOL)application%3A(UIApplication%20*)application%20didFinishLaunchingWithOptions%3A(NSDictionary%20*)launchOptions%20%7B%0A%20%20%20%20%2F%2Fsecure_init%E5%87%BD%E6%95%B0%E9%9C%80%E8%A6%81%E5%9C%A8window%E5%8F%98%E9%87%8F%E5%AE%9E%E4%BE%8B%E5%8C%96%E5%90%8E%E8%BF%9B%E8%A1%8C%E8%B0%83%E7%94%A8%0A%20%20%20%20secure_init(window)%3B%0A%20%20%20%20%0A%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9C%9F%E5%AE%9Eip%0A%20%20%20%20const%20char%20*clientIp%20%3D%20get_client_ip()%3B%0A%20%20%20%20if(nullptr%20!%3D%20clientIp)%20%7B%0A%20%20%20%20%20%20%20%20NSLog(%40%22clientIp%3A%20%25%40%22%2C%20%5BNSString%20stringWithCString%3AclientIp%20encoding%3A%5BNSString%20defaultCStringEncoding%5D%5D)%3B%0A%20%20%20%20%7D%20else%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%E5%85%B3%E9%97%AD%E9%98%B2%E6%8A%A4%EF%BC%8C%E4%BB%8E%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BD%91%E7%AB%99%E8%8E%B7%E5%8F%96IP%0A%20%20%20%20%20%20%20%20secure_off()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96ip%0A%20%20%20%20%20%20%20%20%2F%2F...%0A%20%20%20%20%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96ip%E5%AE%8C%E6%AF%95%E5%90%8E%EF%BC%8C%E6%89%93%E5%BC%80%E9%98%B2%E6%8A%A4%0A%20%20%20%20%20%20%20%20secure_on()%3B%0A%20%20%20%20%7D%0A%20%20%20%20%2F%2F%E4%B8%9A%E5%8A%A1%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91%0A%20%20%20%20%2F%2F......%0A%20%20%20%20return%20YES%3B%0A%7D%0A%0A-%20(void)applicationWillEnterForeground%3A(UIApplication%20*)application%0A%7B%0A%20%20%20%20%2F%2F%E6%AD%A4%E5%87%BD%E6%95%B0%E5%BF%85%E9%A1%BB%E8%B0%83%E7%94%A8%0A%20%20%20%20secure_resume()%3B%0A%7D%0A%0A-%20(void)applicationDidEnterBackground%3A(UIApplication%20*)application%0A%7B%0A%20%20%20%20%2F%2F%20%E5%AE%9E%E7%8E%B0%E5%A6%82%E4%B8%8B%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%89%8D%E8%83%BD%E4%BD%BF%E7%A8%8B%E5%BA%8F%E5%A4%84%E4%BA%8E%E5%90%8E%E5%8F%B0%E6%97%B6%E8%A2%AB%E6%9D%80%E6%AD%BB%EF%BC%8C%E8%B0%83%E7%94%A8applicationWillTerminate%3A%E6%96%B9%E6%B3%95%0A%20%20%20%20%5B%5BUIApplication%20sharedApplication%5D%20beginBackgroundTaskWithExpirationHandler%3A%5E()%7B%7D%5D%3B%0A%7D%0A%0A-%20(void)applicationWillTerminate%3A(UIApplication%20*)application%0A%7B%0A%20%20%20%20secure_destroy()%3B%0A%7D%0A%0A%60%60%60%0A%0A%23%20Windows%0A%23%23%20API%E6%8E%A5%E5%8F%A3%E6%8F%8F%E8%BF%B0%0A%0A%60%60%60%0A%2F%2F%E5%88%9D%E5%A7%8B%E5%8C%96%0Abool%20secure_init()%3B%0A%0A%2F%2F%E8%B5%84%E6%BA%90%E9%87%8A%E6%94%BE%0Avoid%20secure_destroy()%3B%0A%0A%2F%2F%E5%8A%9F%E8%83%BD%E5%BC%80%E5%90%AF%0Avoid%20secure_on()%3B%0A%0A%2F%2F%E5%8A%9F%E8%83%BD%E5%85%B3%E9%97%AD%0Avoid%20secure_off()%3B%0A%0A%2F%2F%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AFIP%EF%BC%8C%E9%9C%80%E8%A6%81%E5%9C%A8secure_init%E5%90%8E%E8%B0%83%E7%94%A8%0A%2F%2F%E6%88%90%E5%8A%9F%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AFIP%EF%BC%8C%E5%A4%B1%E8%B4%A5%E8%BF%94%E5%9B%9ENULL%0Aconst%20char%20*get_client_ip()%0A%60%60%60%0A%0A%23%23%20Visual%20Studio%E9%A1%B9%E7%9B%AE%0A%0A1.%20%E6%8B%B7%E8%B4%9Dnetshield.dll%E5%88%B0%E5%BA%94%E7%94%A8%E7%9B%AE%E5%BD%95%E4%B8%8B%0A2.%20%E4%BF%AE%E6%94%B9main%E5%87%BD%E6%95%B0%0A%0A%60%60%60%0Aint%20main()%0A%7B%0A%20%20%20%20typedef%20void(__cdecl*%20void_func_t)()%3B%0A%20%20%20%20typedef%20bool(__cdecl*%20bool_func_t)()%3B%0A%20%20%20%20typedef%20const%20char%20*(__cdecl*%20secure_get_client_ip_t)()%3B%0A%20%20%20%20typedef%20string(__cdecl*%20get_client_ip_from_network_t)()%3B%0A%20%20%20%20bool_func_t%20secure_init%20%3D%20NULL%3B%0A%20%20%20%20void_func_t%20secure_destroy%20%3D%20NULL%3B%0A%20%20%20%20void_func_t%20secure_on%20%3D%20NULL%3B%0A%20%20%20%20void_func_t%20secure_off%20%3D%20NULL%3B%0A%20%20%20%20secure_get_client_ip_t%20get_client_ip%20%3D%20NULL%3B%0A%20%20%20%20get_client_ip_from_network_t%20get_client_ip_from_network%20%3D%20NULL%3B%0A%20%20%20%20HINSTANCE%20pNetshield%20%3D%20NULL%3B%0A%23ifdef%20UNICODE%0A%20%20%20%20pNetshield%20%3D%20LoadLibraryW(TEXT(%22netshield.dll%22))%3B%0A%23else%0A%20%20%20%20pNetshield%20%3D%20LoadLibraryA(TEXT(%22netshield.dll%22))%3B%0A%23endif%0A%20%20%20%20if%20(NULL%20!%3D%20pNetshield)%20%7B%0A%20%20%20%20%20%20%20%20char%20errmsg%5B512%5D%20%3D%20%7B%200%20%7D%3B%0A%20%20%20%20%20%20%20%20secure_init%20%3D%20(bool_func_t)GetProcAddress(pNetshield%2C%20%22secure_init%22)%3B%0A%20%20%20%20%20%20%20%20secure_destroy%20%3D%20(void_func_t)GetProcAddress(pNetshield%2C%20%22secure_destroy%22)%3B%0A%20%20%20%20%20%20%20%20secure_on%20%3D%20(void_func_t)GetProcAddress(pNetshield%2C%20%22secure_on%22)%3B%0A%20%20%20%20%20%20%20%20secure_off%20%3D%20(void_func_t)GetProcAddress(pNetshield%2C%20%22secure_off%22)%3B%0A%20%20%20%20%20%20%20%20get_client_ip%20%3D%20(secure_get_client_ip_t)GetProcAddress(pNetshield%2C%20%22get_client_ip%22)%3B%0A%20%20%20%20%20%20%20%20get_client_ip_from_network%20%3D%20(get_client_ip_from_network_t)GetProcAddress(pNetshield%2C%20%22get_client_ip_from_network%22)%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20MessageBoxA(NULL%2C%20%22netshield.dll%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5%EF%BC%8C%E8%AF%B7%E8%81%94%E7%B3%BB%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E3%80%82%22%2C%20%22netshield%22%2C%20MB_OK%20%7C%20MB_ICONINFORMATION)%3B%0A%20%20%20%20%20%20%20%20exit(0)%3B%0A%20%20%20%20%7D%0A%20%20%20%20%2F%2F%E8%B0%83%E7%94%A8secure_init%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96sdk%0A%20%20%20%20if%20(!secure_init())%20%7B%0A%20%20%20%20%20%20%20%20return%200%3B%0A%20%20%20%20%7D%0A%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9C%9F%E5%AE%9Eip%0A%20%20%20%20const%20char%20*clientIp%20%3D%20get_client_ip()%3B%0A%20%20%20%20if%20(NULL%20!%3D%20clientIp)%20%7B%0A%20%20%20%20%20%20%20%20fprintf(stdout%2C%20%22clientIp%3A%25s%5Cn%22%2C%20clientIp)%3B%0A%20%20%20%20%7D%0A%20%20%20%20else%20%7B%0A%20%20%20%20%20%20%20%20%2F%2F%E5%85%B3%E9%97%AD%E9%98%B2%E6%8A%A4%EF%BC%8C%E4%BB%8E%E7%AC%AC%E4%B8%89%E6%96%B9%E7%BD%91%E7%AB%99%E8%8E%B7%E5%8F%96IP%0A%20%20%20%20%20%20%20%20secure_off()%3B%0A%20%20%20%20%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96ip%0A%20%20%20%20%20%20%20%20%2F%2F...%0A%20%20%20%20%20%20%20%20%2F%2F%E8%8E%B7%E5%8F%96ip%E5%AE%8C%E6%AF%95%E5%90%8E%EF%BC%8C%E6%89%93%E5%BC%80%E9%98%B2%E6%8A%A4%0A%20%20%20%20%20%20%20%20secure_on()%3B%0A%20%20%20%20%7D%0A%20%20%20%20%2F%2F%E4%B8%9A%E5%8A%A1%E4%BB%A3%E7%A0%81%0A%20%20%20%20%2F%2F......%0A%20%20%20%20%2F%2F%E8%B0%83%E7%94%A8secure_destroy%E9%87%8A%E6%94%BE%E8%B5%84%E6%BA%90%0A%20%20%20%20secure_destroy()%3B%0A%20%20%20%20return%200%3B%0A%7D%0A%60%60%60%0A%0A%23%23%20Unity%E9%A1%B9%E7%9B%AE%0A1.%20%20%E8%A7%A3%E5%8E%8BSDK%E5%8E%8B%E7%BC%A9%E5%8C%85%EF%BC%8C%E5%B0%86%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E5%88%B0Assets%5CPlugins%5C%3CPlatform%3E%E7%9B%AE%E5%BD%95%EF%BC%8C%E5%A6%82Assets%5CPlugins%5Cx86_64%E3%80%82%0A2.%20%20%E6%B7%BB%E5%8A%A0SDK%E5%B7%A5%E5%85%B7%E7%B1%BB%0A%0A%60%60%60%0Apublic%20class%20NetshieldHelper%0A%7B%0A%20%20%20%20%5BDllImport(%22netshield%22)%5D%0A%20%20%20%20public%20static%20extern%20bool%20secure_init()%3B%0A%20%20%20%20%5BDllImport(%22netshield%22)%5D%0A%20%20%20%20public%20static%20extern%20void%20secure_destroy()%3B%0A%20%20%20%20%5BDllImport(%22netshield%22)%5D%0A%20%20%20%20public%20static%20extern%20void%20secure_on()%3B%0A%20%20%20%20%5BDllImport(%22netshield%22)%5D%0A%20%20%20%20public%20static%20extern%20void%20secure_off()%3B%0A%7D%0A%60%60%60%0A%0A3.%20%20%E5%9C%A8Unity3d%E9%A6%96%E4%B8%AAMonoBehaviour%E7%9A%84Start%E5%87%BD%E6%95%B0%E9%87%8C%E8%B0%83%E7%94%A8%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A%0A%0A%60%60%60%0ANetshieldHelper.secure_init()%3B%0A%60%60%60%20%20%0A5.%20%E5%9C%A8Unity3d%E9%A6%96%E4%B8%AAMonoBehaviour%E7%9A%84OnDestroy%E5%87%BD%E6%95%B0%E9%87%8C%E8%B0%83%E7%94%A8%E9%87%8A%E6%94%BE%EF%BC%8C%E9%87%8A%E6%94%BE%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A%0A%60%60%60%0ANetshieldHelper.secure_destroy()%3B%0A%60%60%60%0A6.%20%E5%BC%80%E5%90%AF%E5%92%8C%E5%85%B3%E9%97%ADSDK%0A%60%60%60%0A%2F%2F%20%E5%8A%9F%E8%83%BD%E5%BC%80%E5%90%AF%0ANetshieldHelper.secure_on()%3B%0A%2F%2F%20%E5%8A%9F%E8%83%BD%E5%85%B3%E9%97%AD%0ANetshieldHelper.secure_off()%3B%0A%60%60%60</center></body></html>
