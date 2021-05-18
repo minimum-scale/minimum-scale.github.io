@@ -1,0 +1,35 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="reset.css"> <!-- CSS reset -->
+<link rel="stylesheet" href="style.css"> <!-- Resource style -->
+
+<script src="modernizr.js"></script> <!-- Modernizr -->
+
+<title>jQuery+CSS3实现弹出确认信息</title>
+</head>
+<body>
+
+<a href="#0" class="cd-popup-trigger">查看弹出</a>
+
+<div class="cd-popup" role="alert">
+	<div class="cd-popup-container">
+		<p>你确定你要删除这个元素吗?</p>
+		<ul class="cd-buttons">
+			<li><a href="#">是</a></li>
+			<li><a href="#">否</a></li>
+		</ul>
+		<a href="#" class="cd-popup-close img-replace">关闭</a>
+	</div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
+
+<script src="jquery.1.11.1.js"></script>
+<script src="main.js"></script> <!-- Resource jQuery -->
+
+
+</body>
+</html>
